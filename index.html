@@ -6,26 +6,24 @@
   <title>Today</title>
   <style>
     :root {
-      --color-background: #1a1f2e;
-      --color-background-secondary: #222736;
-      --color-background-tertiary: #1e2333;
-      --color-background-hover: #1a1f2c;
-      --color-border: rgba(255, 255, 255, 0.12);
-      --color-text-primary: #e8eaf0;
-      --color-text-muted: #6b7280;
-      --color-text-secondary: #9ca3af;
-
-      --color-do-first: #E24B4A;
-      --color-schedule: #185FA5;
-      --color-delegate: #BA7517;
-      --color-drop: #888780;
+      --color-background:           #161b27;
+      --color-background-secondary: #1e2433;
+      --color-background-tertiary:  #19202e;
+      --color-border:               rgba(255,255,255,0.08);
+      --color-border-secondary:     rgba(255,255,255,0.12);
+      --color-border-tertiary:      rgba(255,255,255,0.06);
+      --color-text-primary:         #e8eaf0;
+      --color-text-secondary:       #9ca3af;
+      --color-text-tertiary:        #6b7280;
+      --color-do-first:             #E24B4A;
+      --color-schedule:             #185FA5;
+      --color-delegate:             #BA7517;
+      --color-drop:                 #888780;
+      --border-radius-md:           6px;
+      --border-radius-lg:           10px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--color-background);
@@ -34,17 +32,23 @@
       font-size: 14px;
       line-height: 1.5;
       min-height: 100vh;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
     }
 
     h1 {
       font-size: 28px;
       font-weight: 500;
-      margin-bottom: 1.5rem;
-      color: var(--color-text-primary);
+      margin-bottom: 2rem;
     }
 
-    /* Matrix grid */
+    h1 #current-date {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-text-tertiary);
+      margin-left: 0.5rem;
+    }
+
+    /* Matrix */
     .matrix {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -55,29 +59,34 @@
 
     .quadrant {
       background: var(--color-background-secondary);
-      border: 0.5px solid var(--color-border);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
       padding: 1.5rem;
     }
 
+    /* Quadrant header */
     .quadrant-header {
       display: flex;
       align-items: flex-start;
-      gap: 0.5rem;
+      justify-content: space-between;
       margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+    }
+
+    .quadrant-header-left {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 0.5rem;
     }
 
     .quadrant-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      margin-top: 4px;
+      margin-top: 5px;
       flex-shrink: 0;
-    }
-
-    .quadrant-header-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
     }
 
     .quadrant-title {
@@ -88,7 +97,33 @@
 
     .quadrant-description {
       font-size: 12px;
-      color: var(--color-text-muted);
+      color: var(--color-text-tertiary);
+      margin-top: 0.25rem;
+    }
+
+    /* Counts */
+    .quadrant-counts {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+    }
+
+    .count-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .count-label {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+    }
+
+    .count-number {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-primary);
     }
 
     /* Task list */
@@ -101,10 +136,10 @@
 
     .task-empty {
       font-size: 13px;
-      color: var(--color-text-muted);
+      color: var(--color-text-tertiary);
       text-align: center;
+      padding: 2rem 1rem;
       margin: auto;
-      padding: 2rem 0;
       width: 100%;
     }
 
@@ -113,17 +148,20 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.75rem;
-      background: var(--color-background-tertiary);
-      border: 0.5px solid var(--color-border);
-      cursor: default;
+      background: var(--color-background);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-md);
+      cursor: pointer;
     }
 
     .task:hover {
-      background: var(--color-background-hover);
+      background: var(--color-background-tertiary);
+      border-color: var(--color-border-secondary);
     }
 
     .task.completed {
       opacity: 0.5;
+      background: var(--color-background-secondary);
     }
 
     .task-checkbox {
@@ -131,7 +169,7 @@
       height: 16px;
       flex-shrink: 0;
       cursor: pointer;
-      accent-color: var(--color-text-muted);
+      accent-color: var(--color-text-tertiary);
     }
 
     .task-mind-dot {
@@ -151,50 +189,50 @@
 
     .task.completed .task-text {
       text-decoration: line-through;
-      color: var(--color-text-muted);
+      color: var(--color-text-tertiary);
     }
 
     /* Add task section */
     .add-section {
       width: 100%;
+      margin-bottom: 2rem;
     }
 
     .add-section-header {
       font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--color-text-muted);
-      margin-bottom: 0.75rem;
+      color: var(--color-text-tertiary);
+      margin-bottom: 1rem;
     }
 
     .add-row {
       display: flex;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .add-input {
       flex-grow: 1;
+      min-width: 200px;
       padding: 0.75rem;
       background: var(--color-background-secondary);
-      border: 0.5px solid var(--color-border);
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
       color: var(--color-text-primary);
       font-family: inherit;
       font-size: 14px;
       outline: none;
     }
 
-    .add-input::placeholder {
-      color: var(--color-text-muted);
-    }
-
-    .add-input:focus {
-      border-color: rgba(255, 255, 255, 0.25);
-    }
+    .add-input::placeholder { color: var(--color-text-tertiary); }
+    .add-input:focus { border-color: rgba(255,255,255,0.22); }
 
     .add-select {
       padding: 0.75rem;
       background: var(--color-background-secondary);
-      border: 0.5px solid var(--color-border);
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
       color: var(--color-text-primary);
       font-family: inherit;
       font-size: 14px;
@@ -202,17 +240,16 @@
       cursor: pointer;
     }
 
-    .add-select option {
-      background: var(--color-background-secondary);
-    }
+    .add-select option { background: var(--color-background-secondary); }
 
     .btn-mind {
-      padding: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--color-background-secondary);
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      color: var(--color-text-secondary);
       font-family: inherit;
       font-size: 13px;
-      background: transparent;
-      border: 0.5px solid var(--color-text-muted);
-      color: var(--color-text-muted);
       cursor: pointer;
       white-space: nowrap;
     }
@@ -226,164 +263,242 @@
     .btn-add {
       padding: 0.75rem 1rem;
       background: transparent;
-      border: 0.5px solid var(--color-border);
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
       color: var(--color-text-primary);
       font-family: inherit;
       font-size: 14px;
+      font-weight: 500;
       cursor: pointer;
     }
 
     .btn-add:hover {
       background: var(--color-background-secondary);
+      border-color: var(--color-border-secondary);
     }
   </style>
 </head>
 <body>
 
-  <h1>Today</h1>
+  <h1>Today <span id="current-date"></span></h1>
 
   <div class="matrix">
-    <!-- Do First -->
-    <div class="quadrant" id="quadrant-do-first">
+
+    <div class="quadrant">
       <div class="quadrant-header">
-        <div class="quadrant-dot" style="background: var(--color-do-first);"></div>
-        <div class="quadrant-header-text">
-          <span class="quadrant-title">Do First</span>
-          <span class="quadrant-description">Urgent &amp; important</span>
+        <div class="quadrant-header-left">
+          <div class="quadrant-dot" style="background:var(--color-do-first)"></div>
+          <div>
+            <div class="quadrant-title">Do First</div>
+            <div class="quadrant-description">Urgent &amp; important</div>
+          </div>
+        </div>
+        <div class="quadrant-counts" id="counts-do-first">
+          <div class="count-item">
+            <span class="count-label">Done</span>
+            <span class="count-number" data-done>0</span>
+          </div>
+          <div class="count-item">
+            <span class="count-label">Left</span>
+            <span class="count-number" data-left>0</span>
+          </div>
         </div>
       </div>
       <div class="task-list" id="list-do-first"></div>
     </div>
 
-    <!-- Schedule -->
-    <div class="quadrant" id="quadrant-schedule">
+    <div class="quadrant">
       <div class="quadrant-header">
-        <div class="quadrant-dot" style="background: var(--color-schedule);"></div>
-        <div class="quadrant-header-text">
-          <span class="quadrant-title">Schedule</span>
-          <span class="quadrant-description">Not urgent but important</span>
+        <div class="quadrant-header-left">
+          <div class="quadrant-dot" style="background:var(--color-schedule)"></div>
+          <div>
+            <div class="quadrant-title">Schedule</div>
+            <div class="quadrant-description">Not urgent but important</div>
+          </div>
+        </div>
+        <div class="quadrant-counts" id="counts-schedule">
+          <div class="count-item">
+            <span class="count-label">Done</span>
+            <span class="count-number" data-done>0</span>
+          </div>
+          <div class="count-item">
+            <span class="count-label">Left</span>
+            <span class="count-number" data-left>0</span>
+          </div>
         </div>
       </div>
       <div class="task-list" id="list-schedule"></div>
     </div>
 
-    <!-- Delegate -->
-    <div class="quadrant" id="quadrant-delegate">
+    <div class="quadrant">
       <div class="quadrant-header">
-        <div class="quadrant-dot" style="background: var(--color-delegate);"></div>
-        <div class="quadrant-header-text">
-          <span class="quadrant-title">Delegate</span>
-          <span class="quadrant-description">Urgent but not important</span>
+        <div class="quadrant-header-left">
+          <div class="quadrant-dot" style="background:var(--color-delegate)"></div>
+          <div>
+            <div class="quadrant-title">Delegate</div>
+            <div class="quadrant-description">Urgent but not important</div>
+          </div>
+        </div>
+        <div class="quadrant-counts" id="counts-delegate">
+          <div class="count-item">
+            <span class="count-label">Done</span>
+            <span class="count-number" data-done>0</span>
+          </div>
+          <div class="count-item">
+            <span class="count-label">Left</span>
+            <span class="count-number" data-left>0</span>
+          </div>
         </div>
       </div>
       <div class="task-list" id="list-delegate"></div>
     </div>
 
-    <!-- Drop -->
-    <div class="quadrant" id="quadrant-drop">
+    <div class="quadrant">
       <div class="quadrant-header">
-        <div class="quadrant-dot" style="background: var(--color-drop);"></div>
-        <div class="quadrant-header-text">
-          <span class="quadrant-title">Drop</span>
-          <span class="quadrant-description">Neither urgent nor important</span>
+        <div class="quadrant-header-left">
+          <div class="quadrant-dot" style="background:var(--color-drop)"></div>
+          <div>
+            <div class="quadrant-title">Drop</div>
+            <div class="quadrant-description">Neither urgent nor important</div>
+          </div>
+        </div>
+        <div class="quadrant-counts" id="counts-drop">
+          <div class="count-item">
+            <span class="count-label">Done</span>
+            <span class="count-number" data-done>0</span>
+          </div>
+          <div class="count-item">
+            <span class="count-label">Left</span>
+            <span class="count-number" data-left>0</span>
+          </div>
         </div>
       </div>
       <div class="task-list" id="list-drop"></div>
     </div>
+
   </div>
 
-  <!-- Add Task -->
   <div class="add-section">
     <div class="add-section-header">Add Task</div>
     <div class="add-row">
-      <input
-        type="text"
-        class="add-input"
-        id="task-input"
-        placeholder="New task..."
-        autocomplete="off"
-      />
+      <input class="add-input" id="task-input" type="text" placeholder="New task..." autocomplete="off" />
       <select class="add-select" id="task-quadrant">
         <option value="do-first">Do First</option>
         <option value="schedule">Schedule</option>
         <option value="delegate">Delegate</option>
         <option value="drop">Drop</option>
       </select>
-      <button class="btn-mind" id="btn-mind">Mind-heavy</button>
+      <button class="btn-mind" id="btn-mind">+ Mind-heavy</button>
       <button class="btn-add" id="btn-add">Add</button>
     </div>
   </div>
 
   <script>
     const tasks = [
-      { id: 1, text: "Submit project proposal to client", quadrant: "do-first", mindHeavy: true,  completed: false },
-      { id: 2, text: "Fix production login bug",          quadrant: "do-first", mindHeavy: false, completed: false },
-      { id: 3, text: "Review Q2 goals and priorities",    quadrant: "schedule",  mindHeavy: true,  completed: false },
-      { id: 4, text: "Plan next sprint backlog",          quadrant: "schedule",  mindHeavy: false, completed: false },
-      { id: 5, text: "Reply to vendor email",             quadrant: "delegate",  mindHeavy: false, completed: false },
-      { id: 6, text: "Book team lunch venue",             quadrant: "delegate",  mindHeavy: false, completed: false },
-      { id: 7, text: "Reorganise desktop folders",        quadrant: "drop",      mindHeavy: false, completed: false },
-      { id: 8, text: "Morning coffee",                    quadrant: "do-first",  mindHeavy: false, completed: true  },
+      { id: 1, text: "Finish client proposal",   quadrant: "do-first", mindHeavy: true,  completed: false },
+      { id: 2, text: "Code review for squad",     quadrant: "do-first", mindHeavy: false, completed: false },
+      { id: 3, text: "Team standup",              quadrant: "do-first", mindHeavy: true,  completed: false },
+      { id: 4, text: "Morning coffee",            quadrant: "do-first", mindHeavy: false, completed: true  },
+      { id: 5, text: "Plan Q3 roadmap",           quadrant: "schedule", mindHeavy: true,  completed: false },
+      { id: 6, text: "Learn new framework",       quadrant: "schedule", mindHeavy: false, completed: false },
+      { id: 7, text: "Review emails",             quadrant: "delegate", mindHeavy: false, completed: false },
+      { id: 8, text: "Scroll social media",       quadrant: "drop",     mindHeavy: false, completed: false },
     ];
 
     let nextId = 9;
     let mindHeavyActive = false;
 
+    function esc(s) {
+      return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    }
+
     function renderAll() {
-      const quadrants = ["do-first", "schedule", "delegate", "drop"];
-      quadrants.forEach(q => {
-        const list = document.getElementById("list-" + q);
+      ["do-first","schedule","delegate","drop"].forEach(q => {
         const qTasks = tasks.filter(t => t.quadrant === q);
+        const done = qTasks.filter(t => t.completed).length;
+        const left = qTasks.length - done;
+
+        const counts = document.getElementById("counts-" + q);
+        counts.querySelector("[data-done]").textContent = done;
+        counts.querySelector("[data-left]").textContent = left;
+
+        const list = document.getElementById("list-" + q);
         list.innerHTML = "";
+
         if (qTasks.length === 0) {
           list.innerHTML = '<div class="task-empty">No tasks</div>';
           return;
         }
+
         qTasks.forEach(task => {
           const el = document.createElement("div");
           el.className = "task" + (task.completed ? " completed" : "");
-          el.innerHTML = `
-            <input type="checkbox" class="task-checkbox" ${task.completed ? "checked" : ""} data-id="${task.id}" />
-            ${task.mindHeavy ? '<div class="task-mind-dot"></div>' : ""}
-            <span class="task-text">${escapeHtml(task.text)}</span>
-          `;
-          el.querySelector(".task-checkbox").addEventListener("change", function() {
-            const t = tasks.find(t => t.id === parseInt(this.dataset.id));
-            if (t) t.completed = this.checked;
+
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.className = "task-checkbox";
+          cb.checked = task.completed;
+          cb.addEventListener("change", () => {
+            task.completed = cb.checked;
             renderAll();
           });
+
+          el.appendChild(cb);
+
+          if (task.mindHeavy) {
+            const dot = document.createElement("div");
+            dot.className = "task-mind-dot";
+            el.appendChild(dot);
+          }
+
+          const span = document.createElement("span");
+          span.className = "task-text";
+          span.textContent = task.text;
+          el.appendChild(span);
+
+          el.addEventListener("click", e => {
+            if (e.target === cb) return;
+            cb.checked = !cb.checked;
+            task.completed = cb.checked;
+            renderAll();
+          });
+
           list.appendChild(el);
         });
       });
-    }
-
-    function escapeHtml(str) {
-      return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
     }
 
     function addTask() {
       const input = document.getElementById("task-input");
       const text = input.value.trim();
       if (!text) return;
-      const quadrant = document.getElementById("task-quadrant").value;
-      tasks.push({ id: nextId++, text, quadrant, mindHeavy: mindHeavyActive, completed: false });
+      tasks.push({
+        id: nextId++,
+        text,
+        quadrant: document.getElementById("task-quadrant").value,
+        mindHeavy: mindHeavyActive,
+        completed: false,
+      });
       input.value = "";
       mindHeavyActive = false;
-      document.getElementById("btn-mind").classList.remove("active");
+      const btnMind = document.getElementById("btn-mind");
+      btnMind.classList.remove("active");
+      btnMind.textContent = "+ Mind-heavy";
       renderAll();
       input.focus();
     }
 
     document.getElementById("btn-add").addEventListener("click", addTask);
-
-    document.getElementById("task-input").addEventListener("keydown", function(e) {
+    document.getElementById("task-input").addEventListener("keydown", e => {
       if (e.key === "Enter") addTask();
     });
-
     document.getElementById("btn-mind").addEventListener("click", function() {
       mindHeavyActive = !mindHeavyActive;
       this.classList.toggle("active", mindHeavyActive);
+      this.textContent = mindHeavyActive ? "🧠 Mind-heavy" : "+ Mind-heavy";
     });
+
+    document.getElementById("current-date").textContent = new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 
     renderAll();
   </script>
