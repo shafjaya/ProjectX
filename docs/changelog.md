@@ -8,3 +8,10 @@
   - Tasks with checkbox, optional mind-heavy indicator, completed state
   - Add task form with quadrant select, mind-heavy toggle, Enter key support
   - 8 example tasks pre-loaded across all quadrants
+- Redesigned dashboard with refined spec
+  - Real-time Done/Left counts per quadrant
+  - Border radius on quadrants and form elements
+  - Clicking anywhere on task row toggles completion
+  - Improved hover states and completed task styling
+  - Mind-heavy button label: `+ Mind-heavy` / `🧠 Mind-heavy`
+- Added current date display next to "Today" heading (muted, smaller text)
