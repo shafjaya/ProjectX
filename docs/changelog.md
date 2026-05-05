@@ -15,3 +15,8 @@
   - Improved hover states and completed task styling
   - Mind-heavy button label: `+ Mind-heavy` / `🧠 Mind-heavy`
 - Added current date display next to "Today" heading (muted, smaller text)
+- Added trash drawer for overflow completed tasks
+  - Max 3 most recent completed tasks shown inline per quadrant
+  - Older completed tasks collapse behind a trash icon with count
+  - Clicking trash icon toggles a drawer listing overflow items
+  - Items in drawer can still be unchecked to restore them
