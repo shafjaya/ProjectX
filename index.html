@@ -62,6 +62,7 @@
       border: 0.5px solid var(--color-border-tertiary);
       border-radius: var(--border-radius-lg);
       padding: 1.5rem;
+      position: relative;
     }
 
     /* Quadrant header */
@@ -192,6 +193,98 @@
       color: var(--color-text-tertiary);
     }
 
+    /* Quadrant footer with trash */
+    .quadrant-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.75rem;
+    }
+
+    .trash-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-tertiary);
+      font-family: inherit;
+      font-size: 12px;
+      padding: 0.25rem 0;
+    }
+
+    .trash-btn:hover {
+      color: var(--color-text-secondary);
+    }
+
+    .trash-btn svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+    }
+
+    .trash-btn .trash-count {
+      font-size: 11px;
+    }
+
+    /* Trash drawer */
+    .trash-drawer {
+      display: none;
+      margin-top: 0.5rem;
+      border-top: 0.5px solid var(--color-border-tertiary);
+      padding-top: 0.75rem;
+    }
+
+    .trash-drawer.open {
+      display: block;
+    }
+
+    .trash-drawer-header {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 0.5rem;
+    }
+
+    .trash-task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .trash-task {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--color-background);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-md);
+      opacity: 0.45;
+      cursor: pointer;
+    }
+
+    .trash-task:hover {
+      opacity: 0.7;
+      border-color: var(--color-border-secondary);
+    }
+
+    .trash-task-checkbox {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      cursor: pointer;
+      accent-color: var(--color-text-tertiary);
+    }
+
+    .trash-task-text {
+      font-size: 13px;
+      color: var(--color-text-tertiary);
+      text-decoration: line-through;
+      flex-grow: 1;
+    }
+
     /* Add task section */
     .add-section {
       width: 100%;
@@ -294,17 +387,16 @@
           </div>
         </div>
         <div class="quadrant-counts" id="counts-do-first">
-          <div class="count-item">
-            <span class="count-label">Done</span>
-            <span class="count-number" data-done>0</span>
-          </div>
-          <div class="count-item">
-            <span class="count-label">Left</span>
-            <span class="count-number" data-left>0</span>
-          </div>
+          <div class="count-item"><span class="count-label">Done</span><span class="count-number" data-done>0</span></div>
+          <div class="count-item"><span class="count-label">Left</span><span class="count-number" data-left>0</span></div>
         </div>
       </div>
       <div class="task-list" id="list-do-first"></div>
+      <div class="quadrant-footer" id="footer-do-first"></div>
+      <div class="trash-drawer" id="drawer-do-first">
+        <div class="trash-drawer-header">Completed</div>
+        <div class="trash-task-list" id="trash-list-do-first"></div>
+      </div>
     </div>
 
     <div class="quadrant">
@@ -317,17 +409,16 @@
           </div>
         </div>
         <div class="quadrant-counts" id="counts-schedule">
-          <div class="count-item">
-            <span class="count-label">Done</span>
-            <span class="count-number" data-done>0</span>
-          </div>
-          <div class="count-item">
-            <span class="count-label">Left</span>
-            <span class="count-number" data-left>0</span>
-          </div>
+          <div class="count-item"><span class="count-label">Done</span><span class="count-number" data-done>0</span></div>
+          <div class="count-item"><span class="count-label">Left</span><span class="count-number" data-left>0</span></div>
         </div>
       </div>
       <div class="task-list" id="list-schedule"></div>
+      <div class="quadrant-footer" id="footer-schedule"></div>
+      <div class="trash-drawer" id="drawer-schedule">
+        <div class="trash-drawer-header">Completed</div>
+        <div class="trash-task-list" id="trash-list-schedule"></div>
+      </div>
     </div>
 
     <div class="quadrant">
@@ -340,17 +431,16 @@
           </div>
         </div>
         <div class="quadrant-counts" id="counts-delegate">
-          <div class="count-item">
-            <span class="count-label">Done</span>
-            <span class="count-number" data-done>0</span>
-          </div>
-          <div class="count-item">
-            <span class="count-label">Left</span>
-            <span class="count-number" data-left>0</span>
-          </div>
+          <div class="count-item"><span class="count-label">Done</span><span class="count-number" data-done>0</span></div>
+          <div class="count-item"><span class="count-label">Left</span><span class="count-number" data-left>0</span></div>
         </div>
       </div>
       <div class="task-list" id="list-delegate"></div>
+      <div class="quadrant-footer" id="footer-delegate"></div>
+      <div class="trash-drawer" id="drawer-delegate">
+        <div class="trash-drawer-header">Completed</div>
+        <div class="trash-task-list" id="trash-list-delegate"></div>
+      </div>
     </div>
 
     <div class="quadrant">
@@ -363,17 +453,16 @@
           </div>
         </div>
         <div class="quadrant-counts" id="counts-drop">
-          <div class="count-item">
-            <span class="count-label">Done</span>
-            <span class="count-number" data-done>0</span>
-          </div>
-          <div class="count-item">
-            <span class="count-label">Left</span>
-            <span class="count-number" data-left>0</span>
-          </div>
+          <div class="count-item"><span class="count-label">Done</span><span class="count-number" data-done>0</span></div>
+          <div class="count-item"><span class="count-label">Left</span><span class="count-number" data-left>0</span></div>
         </div>
       </div>
       <div class="task-list" id="list-drop"></div>
+      <div class="quadrant-footer" id="footer-drop"></div>
+      <div class="trash-drawer" id="drawer-drop">
+        <div class="trash-drawer-header">Completed</div>
+        <div class="trash-task-list" id="trash-list-drop"></div>
+      </div>
     </div>
 
   </div>
@@ -407,64 +496,95 @@
 
     let nextId = 9;
     let mindHeavyActive = false;
+    const drawerOpen = {};
 
-    function esc(s) {
-      return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    const TRASH_ICON = `<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 3.5h10M5.5 3.5V2.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1M3 3.5l.667 7.5a.5.5 0 0 0 .499.5h5.668a.5.5 0 0 0 .499-.5L11 3.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+
+    function makeTaskEl(task, inTrash) {
+      const el = document.createElement("div");
+      el.className = inTrash ? "trash-task" : "task" + (task.completed ? " completed" : "");
+
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.className = inTrash ? "trash-task-checkbox" : "task-checkbox";
+      cb.checked = task.completed;
+      cb.addEventListener("change", () => {
+        task.completed = cb.checked;
+        renderAll();
+      });
+      el.appendChild(cb);
+
+      if (!inTrash && task.mindHeavy) {
+        const dot = document.createElement("div");
+        dot.className = "task-mind-dot";
+        el.appendChild(dot);
+      }
+
+      const span = document.createElement("span");
+      span.className = inTrash ? "trash-task-text" : "task-text";
+      span.textContent = task.text;
+      el.appendChild(span);
+
+      el.addEventListener("click", e => {
+        if (e.target === cb) return;
+        cb.checked = !cb.checked;
+        task.completed = cb.checked;
+        renderAll();
+      });
+
+      return el;
     }
 
     function renderAll() {
       ["do-first","schedule","delegate","drop"].forEach(q => {
         const qTasks = tasks.filter(t => t.quadrant === q);
-        const done = qTasks.filter(t => t.completed).length;
-        const left = qTasks.length - done;
+        const completedTasks = qTasks.filter(t => t.completed);
+        const activeTasks = qTasks.filter(t => !t.completed);
+        const done = completedTasks.length;
+        const left = activeTasks.length;
 
+        // Update counts
         const counts = document.getElementById("counts-" + q);
         counts.querySelector("[data-done]").textContent = done;
         counts.querySelector("[data-left]").textContent = left;
 
+        // Render main list: active tasks + 3 most recent completed
         const list = document.getElementById("list-" + q);
         list.innerHTML = "";
 
-        if (qTasks.length === 0) {
+        const visibleCompleted = completedTasks.slice(-3);
+        const overflowCompleted = completedTasks.slice(0, -3);
+        const visibleTasks = [...activeTasks, ...visibleCompleted];
+
+        if (visibleTasks.length === 0) {
           list.innerHTML = '<div class="task-empty">No tasks</div>';
-          return;
+        } else {
+          visibleTasks.forEach(task => list.appendChild(makeTaskEl(task, false)));
         }
 
-        qTasks.forEach(task => {
-          const el = document.createElement("div");
-          el.className = "task" + (task.completed ? " completed" : "");
-
-          const cb = document.createElement("input");
-          cb.type = "checkbox";
-          cb.className = "task-checkbox";
-          cb.checked = task.completed;
-          cb.addEventListener("change", () => {
-            task.completed = cb.checked;
-            renderAll();
+        // Render footer trash button
+        const footer = document.getElementById("footer-" + q);
+        footer.innerHTML = "";
+        if (overflowCompleted.length > 0) {
+          const btn = document.createElement("button");
+          btn.className = "trash-btn";
+          btn.innerHTML = TRASH_ICON + `<span class="trash-count">${overflowCompleted.length} older tasks</span>`;
+          btn.addEventListener("click", () => {
+            drawerOpen[q] = !drawerOpen[q];
+            document.getElementById("drawer-" + q).classList.toggle("open", drawerOpen[q]);
           });
+          footer.appendChild(btn);
+        } else {
+          drawerOpen[q] = false;
+          document.getElementById("drawer-" + q).classList.remove("open");
+        }
 
-          el.appendChild(cb);
-
-          if (task.mindHeavy) {
-            const dot = document.createElement("div");
-            dot.className = "task-mind-dot";
-            el.appendChild(dot);
-          }
-
-          const span = document.createElement("span");
-          span.className = "task-text";
-          span.textContent = task.text;
-          el.appendChild(span);
-
-          el.addEventListener("click", e => {
-            if (e.target === cb) return;
-            cb.checked = !cb.checked;
-            task.completed = cb.checked;
-            renderAll();
-          });
-
-          list.appendChild(el);
-        });
+        // Render trash drawer
+        const trashList = document.getElementById("trash-list-" + q);
+        trashList.innerHTML = "";
+        overflowCompleted.forEach(task => trashList.appendChild(makeTaskEl(task, true)));
       });
     }
 
