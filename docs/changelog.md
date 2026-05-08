@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-05-08
+- Made layout responsive across browser sizes
+  - Matrix switches from 2-column to 1-column grid below 640px
+  - Body padding reduces at 900px and 640px breakpoints
+  - Quadrant select stretches to fill available width on mobile
+  - h1 font-size reduced to 22px on small screens
+- Added 5rem bottom padding to body so Add Task section has breathing room
+
 ## 2026-05-05
 - Built morning todo dashboard (`index.html`)
   - Eisenhower matrix 2x2 grid layout
