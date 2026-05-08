@@ -1,6 +1,8 @@
 # Changelog
 
 ## 2026-05-08
+- Added Unsplash background image at 20% opacity via fixed body::before pseudo-element
+- Quadrant cards set to 90% opacity to let background show through
 - Added motivational quote section below the Add Task form
   - 10 task-completion quotes, one chosen at random on each page load
   - Styled muted/italic to sit quietly beneath the form
