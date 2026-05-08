@@ -1,7 +1,7 @@
 # Changelog
 
 ## 2026-05-08
-- Added mountain bike carousel below Add Task section
+- Fixed bike carousel: verified all 7 image URLs, added onerror fallback placeholder, fixed carousel arrow scroll, added overflow:hidden to wrapper
   - 7 bikes from Trek, Specialized, Giant, Cannondale, Canyon, Santa Cruz, Kona
   - Each card shows bike image, name, retailer, price, and a View More button
   - View More opens the retailer's page in a new tab
