@@ -1,6 +1,10 @@
 # Changelog
 
 ## 2026-05-08
+- Added drag-and-drop to move tasks between quadrants
+  - Tasks are draggable; dropping onto any quadrant's task list moves the task
+  - Dashed outline highlights the target quadrant on drag-over
+  - Trash drawer tasks are not draggable
 - Added Unsplash background image at 20% opacity via fixed body::before pseudo-element
 - Quadrant cards set to 90% opacity to let background show through
 - Added motivational quote section below the Add Task form

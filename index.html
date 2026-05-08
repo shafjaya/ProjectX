@@ -164,12 +164,23 @@
       background: var(--color-background);
       border: 0.5px solid var(--color-border-tertiary);
       border-radius: var(--border-radius-md);
-      cursor: pointer;
+      cursor: grab;
     }
 
     .task:hover {
       background: var(--color-background-tertiary);
       border-color: var(--color-border-secondary);
+    }
+
+    .task.dragging {
+      opacity: 0.35;
+      cursor: grabbing;
+    }
+
+    .task-list.drag-over {
+      outline: 1.5px dashed var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      background: rgba(255,255,255,0.03);
     }
 
     .task.completed {
@@ -556,6 +567,16 @@
       const el = document.createElement("div");
       el.className = inTrash ? "trash-task" : "task" + (task.completed ? " completed" : "");
 
+      if (!inTrash) {
+        el.draggable = true;
+        el.addEventListener("dragstart", e => {
+          e.dataTransfer.setData("taskId", task.id);
+          e.dataTransfer.effectAllowed = "move";
+          el.classList.add("dragging");
+        });
+        el.addEventListener("dragend", () => el.classList.remove("dragging"));
+      }
+
       const cb = document.createElement("input");
       cb.type = "checkbox";
       cb.className = inTrash ? "trash-task-checkbox" : "task-checkbox";
@@ -686,6 +707,25 @@
       document.getElementById("quote-text").textContent = "“" + q.text + "”";
       document.getElementById("quote-author").textContent = "— " + q.author;
     })();
+
+    ["do-first", "schedule", "delegate", "drop"].forEach(q => {
+      const list = document.getElementById("list-" + q);
+      list.addEventListener("dragover", e => {
+        e.preventDefault();
+        list.classList.add("drag-over");
+      });
+      list.addEventListener("dragleave", () => list.classList.remove("drag-over"));
+      list.addEventListener("drop", e => {
+        e.preventDefault();
+        list.classList.remove("drag-over");
+        const id = parseInt(e.dataTransfer.getData("taskId"));
+        const task = tasks.find(t => t.id === id);
+        if (task && task.quadrant !== q) {
+          task.quadrant = q;
+          renderAll();
+        }
+      });
+    });
 
     document.getElementById("current-date").textContent = new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 
