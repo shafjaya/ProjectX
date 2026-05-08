@@ -12,6 +12,7 @@ A personal morning todo dashboard built with Claude Code. Uses the Eisenhower ma
 - Add tasks with quadrant selection, mind-heavy toggle, Enter key support
 - Motivational quote shown on each page load
 - "Found some free time?" carousel for browsing gravel bikes and ordering pizza
+- Tasks persist across refreshes via localStorage — nothing is lost when you close the tab
 - Responsive layout — works on wide monitors and narrow browser windows
 - Background image with dark overlay for visual atmosphere
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-05-08 (session 2)
+- Added localStorage persistence — tasks and their state survive page refresh and browser restarts
+  - Falls back to default example tasks on first load
+  - Saves automatically on every change (add, complete, drag, uncheck)
+
 ## 2026-05-08
 - Made layout responsive across browser sizes
   - Matrix switches from 2-column to 1-column grid below 640px

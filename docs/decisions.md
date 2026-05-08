@@ -9,8 +9,8 @@ Showing all completed tasks inline would push active tasks down and clutter the 
 ## Completed tasks ordered oldest-first in trash drawer
 The trash drawer shows overflow completed items in the order they were added (oldest first), since the 3 most recent are already visible inline. This avoids duplication and gives a natural chronological archive.
 
-## No persistence (no localStorage)
-Tasks reset on page refresh. Intentional for now — keeps the implementation simple and stateless. Adding localStorage is in ideas.md for a future session.
+## localStorage persistence via projectx_tasks and projectx_next_id keys
+Tasks are saved to localStorage on every renderAll() call — the single choke point for all state changes. nextId is persisted alongside so new tasks never collide with existing ones. Default example tasks load only when no saved data exists.
 
 ## Background image applied via body::before at 20% opacity
 Using a pseudo-element rather than setting opacity on the body itself means the image sits behind all content without affecting text or card readability. 20% keeps it atmospheric without competing with the UI.

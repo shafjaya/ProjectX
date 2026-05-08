@@ -681,7 +681,7 @@
   </div>
 
   <script>
-    const tasks = [
+    const DEFAULT_TASKS = [
       { id: 1, text: "Finish client proposal",   quadrant: "do-first", mindHeavy: true,  completed: false },
       { id: 2, text: "Code review for squad",     quadrant: "do-first", mindHeavy: false, completed: false },
       { id: 3, text: "Team standup",              quadrant: "do-first", mindHeavy: true,  completed: false },
@@ -692,7 +692,13 @@
       { id: 8, text: "Scroll social media",       quadrant: "drop",     mindHeavy: false, completed: false },
     ];
 
-    let nextId = 9;
+    const tasks = JSON.parse(localStorage.getItem("projectx_tasks") || "null") || DEFAULT_TASKS;
+    let nextId = parseInt(localStorage.getItem("projectx_next_id") || "9", 10);
+
+    function saveTasks() {
+      localStorage.setItem("projectx_tasks", JSON.stringify(tasks));
+      localStorage.setItem("projectx_next_id", nextId);
+    }
     let mindHeavyActive = false;
     const drawerOpen = {};
 
@@ -794,6 +800,7 @@
         trashList.innerHTML = "";
         overflowCompleted.forEach(task => trashList.appendChild(makeTaskEl(task, true)));
       });
+      saveTasks();
     }
 
     function addTask() {
