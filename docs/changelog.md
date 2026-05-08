@@ -1,6 +1,11 @@
 # Changelog
 
 ## 2026-05-08
+- Added mountain bike carousel below Add Task section
+  - 7 bikes from Trek, Specialized, Giant, Cannondale, Canyon, Santa Cruz, Kona
+  - Each card shows bike image, name, retailer, price, and a View More button
+  - View More opens the retailer's page in a new tab
+  - Left/right arrow nav buttons; horizontal scroll-snap carousel
 - Added drag-and-drop to move tasks between quadrants
   - Tasks are draggable; dropping onto any quadrant's task list moves the task
   - Dashed outline highlights the target quadrant on drag-over

@@ -415,6 +415,133 @@
       opacity: 0.6;
     }
 
+    /* Bikes carousel */
+    .bikes-section {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .bikes-header {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 1rem;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+    }
+
+    .carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 0.5rem;
+      scrollbar-width: none;
+    }
+
+    .carousel::-webkit-scrollbar { display: none; }
+
+    .bike-card {
+      min-width: 220px;
+      max-width: 220px;
+      background: var(--color-background-secondary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bike-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bike-card-body {
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      flex: 1;
+    }
+
+    .bike-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      line-height: 1.4;
+    }
+
+    .bike-retailer {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+    }
+
+    .bike-price {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-top: 0.2rem;
+    }
+
+    .btn-view {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      display: inline-block;
+      padding: 0.5rem 0.75rem;
+      margin-top: 0.75rem;
+      background: transparent;
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      color: var(--color-text-primary);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .btn-view:hover {
+      background: var(--color-background-tertiary);
+      border-color: var(--color-border-secondary);
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .carousel-btn {
+      background: var(--color-background-secondary);
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      color: var(--color-text-secondary);
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-btn:hover {
+      background: var(--color-background-tertiary);
+      color: var(--color-text-primary);
+    }
+
     @media (max-width: 900px) {
       body { padding: 1.75rem 1.25rem 5rem; }
     }
@@ -540,6 +667,17 @@
       </select>
       <button class="btn-mind" id="btn-mind">+ Mind-heavy</button>
       <button class="btn-add" id="btn-add">Add</button>
+    </div>
+  </div>
+
+  <div class="bikes-section">
+    <div class="bikes-header">Mountain Bikes</div>
+    <div class="carousel-wrapper">
+      <div class="carousel" id="bike-carousel"></div>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="carousel-prev">&#8592;</button>
+        <button class="carousel-btn" id="carousel-next">&#8594;</button>
+      </div>
     </div>
   </div>
 
@@ -688,6 +826,80 @@
       this.classList.toggle("active", mindHeavyActive);
       this.textContent = mindHeavyActive ? "🧠 Mind-heavy" : "+ Mind-heavy";
     });
+
+    const BIKES = [
+      {
+        name: "Trek Marlin 6 Gen 3",
+        retailer: "Trek",
+        price: "$849.99",
+        image: "https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?w=440&h=300&fit=crop&auto=format",
+        url: "https://www.trekbikes.com/us/en_US/bikes/mountain-bikes/hardtail-mountain-bikes/marlin/",
+      },
+      {
+        name: "Specialized Rockhopper Comp 29",
+        retailer: "Specialized",
+        price: "$1,050.00",
+        image: "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=440&h=300&fit=crop&auto=format",
+        url: "https://www.specialized.com/us/en/mountain-bikes",
+      },
+      {
+        name: "Giant Talon 1",
+        retailer: "Giant",
+        price: "$750.00",
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=440&h=300&fit=crop&auto=format",
+        url: "https://www.giant-bicycles.com/en-us/bikes/mountain",
+      },
+      {
+        name: "Cannondale Trail SL 4",
+        retailer: "Cannondale",
+        price: "$1,000.00",
+        image: "https://images.unsplash.com/photo-1547527279-b4a5d421f4d3?w=440&h=300&fit=crop&auto=format",
+        url: "https://www.cannondale.com/en/bikes/mountain",
+      },
+      {
+        name: "Canyon Neuron AL 7",
+        retailer: "Canyon",
+        price: "$1,199.00",
+        image: "https://images.unsplash.com/photo-1612705827559-27d6f64d5caf?w=440&h=300&fit=crop&auto=format",
+        url: "https://www.canyon.com/en-us/mountain-bikes/",
+      },
+      {
+        name: "Santa Cruz Chameleon",
+        retailer: "Santa Cruz",
+        price: "$1,649.00",
+        image: "https://images.unsplash.com/photo-1606229025-7e15f70e48e6?w=440&h=300&fit=crop&auto=format",
+        url: "https://www.santacruzbicycles.com/en-US/bikes",
+      },
+      {
+        name: "Kona Process 134",
+        retailer: "Kona",
+        price: "$2,299.00",
+        image: "https://images.unsplash.com/photo-1622327491702-c738db96e7e1?w=440&h=300&fit=crop&auto=format",
+        url: "https://www.konaworld.com/mountain.cfm",
+      },
+    ];
+
+    (function buildCarousel() {
+      const carousel = document.getElementById("bike-carousel");
+      BIKES.forEach(bike => {
+        const card = document.createElement("div");
+        card.className = "bike-card";
+        card.innerHTML = `
+          <img src="${bike.image}" alt="${bike.name}" loading="lazy" />
+          <div class="bike-card-body">
+            <div class="bike-name">${bike.name}</div>
+            <div class="bike-retailer">${bike.retailer}</div>
+            <div class="bike-price">${bike.price}</div>
+            <a class="btn-view" href="${bike.url}" target="_blank" rel="noopener noreferrer">View More</a>
+          </div>
+        `;
+        carousel.appendChild(card);
+      });
+
+      const SCROLL = 240;
+      document.getElementById("carousel-prev").addEventListener("click", () => carousel.scrollBy({ left: -SCROLL, behavior: "smooth" }));
+      document.getElementById("carousel-next").addEventListener("click", () => carousel.scrollBy({ left:  SCROLL, behavior: "smooth" }));
+    })();
 
     const QUOTES = [
       { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
