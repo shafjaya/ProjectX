@@ -1,6 +1,11 @@
 # Changelog
 
 ## 2026-05-08
+- Added motivational quote section below the Add Task form
+  - 10 task-completion quotes, one chosen at random on each page load
+  - Styled muted/italic to sit quietly beneath the form
+
+
 - Made layout responsive across browser sizes
   - Matrix switches from 2-column to 1-column grid below 640px
   - Body padding reduces at 900px and 640px breakpoints

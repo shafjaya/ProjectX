@@ -370,6 +370,28 @@
       border-color: var(--color-border-secondary);
     }
 
+    /* Quote section */
+    .quote-section {
+      width: 100%;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    .quote-text {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--color-text-tertiary);
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 0.4rem;
+    }
+
+    .quote-author {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      opacity: 0.6;
+    }
+
     @media (max-width: 900px) {
       body { padding: 1.75rem 1.25rem 5rem; }
     }
@@ -476,6 +498,11 @@
       </div>
     </div>
 
+  </div>
+
+  <div class="quote-section">
+    <div class="quote-text" id="quote-text"></div>
+    <div class="quote-author" id="quote-author"></div>
   </div>
 
   <div class="add-section">
@@ -628,6 +655,25 @@
       this.classList.toggle("active", mindHeavyActive);
       this.textContent = mindHeavyActive ? "🧠 Mind-heavy" : "+ Mind-heavy";
     });
+
+    const QUOTES = [
+      { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+      { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar" },
+      { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+      { text: "Done is better than perfect.", author: "Sheryl Sandberg" },
+      { text: "Action is the foundational key to all success.", author: "Pablo Picasso" },
+      { text: "Focus on being productive instead of busy.", author: "Tim Ferriss" },
+      { text: "Small daily improvements over time lead to stunning results.", author: "Robin Sharma" },
+      { text: "You can always edit a bad page. You can't edit a blank page.", author: "Jodi Picoult" },
+      { text: "The way to get started is to quit talking and begin doing.", author: "Walt Disney" },
+      { text: "Productivity is never an accident. It is always the result of a commitment to excellence.", author: "Paul J. Meyer" },
+    ];
+
+    (function showQuote() {
+      const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+      document.getElementById("quote-text").textContent = "“" + q.text + "”";
+      document.getElementById("quote-author").textContent = "— " + q.author;
+    })();
 
     document.getElementById("current-date").textContent = new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 
